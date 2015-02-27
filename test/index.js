@@ -10,8 +10,13 @@ var assert = require('assert')
 describe('Parent.js', function() {
   it('works', function() {
     var copy = path.join(dir, '/module.js/node_modules/parent.js/index.js')
-    
+
+
     var parent = require('../index')
+
+    console.log('parent: ', parent)
+    console.log('mocha: ', path.join(__dirname, '/../node_modules/mocha/bin'))
+
     ase(parent, path.join(__dirname, '/../node_modules/mocha/bin'))
 
     fs.writeFileSync(copy, fs.readFileSync(main))

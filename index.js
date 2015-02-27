@@ -20,17 +20,20 @@ var path = require('path')
  */
 
 module.exports = (function() {
-  if (~__dirname.indexOf('node_modules')) {
-    debug('walking `node_modules` dir')
+  // if (~__dirname.indexOf('node_modules')) {
+  //   debug('walking `node_modules` dir')
 
-    var dir = module.id
+  //   var dir = module.id
 
-    while (path.basename(dir) !== 'node_modules') {
-      debug('walking `%s`', dir)
-      dir = path.dirname(dir)
-    }
-    return path.dirname(dir)
-  }
+  //   while (path.basename(dir) !== 'node_modules') {
+  //     debug('walking `%s`', dir)
+  //     dir = path.dirname(dir)
+  //   }
+
+  //   var p = path.dirname(dir)
+  //   debug('found `%s`', p)
+  //   return p
+  // }
 
   debug('walking module parent tree')
 
@@ -41,5 +44,8 @@ module.exports = (function() {
     debug('walking `%s`', dir.id)
     dir = dir.parent
   }
-  return path.dirname(dir.filename)
+
+  var p = path.dirname(dir.filename)
+  debug('found `%s`', p)
+  return p
 })()
