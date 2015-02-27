@@ -5,8 +5,8 @@
  */
 
 var path = require('path')
-  , name = require('./package.json').name
-  , debug = require('debug')(name)
+  , debug = require('debug')('parent-dir')
+  , nm = '/node_modules'
 
 /**
  * Find the parent app directory by looking up the directory
@@ -20,32 +20,41 @@ var path = require('path')
  */
 
 module.exports = (function() {
-  // if (~__dirname.indexOf('node_modules')) {
-  //   debug('walking `node_modules` dir')
-
-  //   var dir = module.id
-
-  //   while (path.basename(dir) !== 'node_modules') {
-  //     debug('walking `%s`', dir)
-  //     dir = path.dirname(dir)
-  //   }
-
-  //   var p = path.dirname(dir)
-  //   debug('found `%s`', p)
-  //   return p
-  // }
-
   debug('walking module parent tree')
 
-  // Not installed as a module, possibly included with `npm link`
   var dir = module
+    , p
 
-  while (dir.parent) {
+  // This is the simplest way, if included as a node module, the parent directory 
+  // is generally the first dir to have a `node_modules` dir
+  if (!!~dir.id.indexOf(nm)) {
+    p = dir.id.split(nm)[0]
+
+    debug('simple path: `%s`', p)
+  }
+
+  // We dont want to go all the way up the chain, in the case we are running
+  // in a test context such as `mocha`, move up the chain if the current dir 
+  // is within `node_modules`, or if not, that the parent directory isnt moving
+  // *into* the `node_modules` dir.
+  while (dir.parent 
+    && (
+      !!~dir.id.indexOf(nm) 
+      || !~dir.parent.id.indexOf(nm)
+    ) && (
+      // Dont move down further into dirs
+      !~path.dirname(dir.parent.id).indexOf(path.dirname(dir.id))
+    )
+  ) {
+    
     debug('walking `%s`', dir.id)
     dir = dir.parent
   }
 
-  var p = path.dirname(dir.filename)
+  // If the module path contains the simple path found above, dont use it
+  var p2 = path.dirname(dir.id)
+  if (!~p2.indexOf(p)) p = p2
+
   debug('found `%s`', p)
   return p
 })()

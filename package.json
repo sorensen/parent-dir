@@ -2,7 +2,7 @@
   "author": "Beau Sorensen <mail@beausorensen.com> (http://github.com/sorensen)",
   "name": "parent-dir",
   "description": "Find the project parent directory",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha -R spec test/index.js",
+    "test": "./node_modules/mocha/bin/mocha -R spec test/index.js",
     "hint": "jshint *.js *.json test/*.js"
   },
   "devDependencies": {

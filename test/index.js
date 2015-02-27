@@ -14,16 +14,17 @@ describe('Parent.js', function() {
 
     var parent = require('../index')
 
-    console.log('parent: ', parent)
-    console.log('mocha: ', path.join(__dirname, '/../node_modules/mocha/bin'))
+    // console.log('parent: ', parent)
+    // console.log('mocha: ', path.join(__dirname, '/../node_modules/mocha/bin'))
 
-    ase(parent, path.join(__dirname, '/../node_modules/mocha/bin'))
+    
+    ase(parent, path.join(__dirname, '/..'))
 
     fs.writeFileSync(copy, fs.readFileSync(main))
     delete require.cache[require.resolve('../index')]
 
     var module = require('./module.js/index')
-    ase(module, path.join(__dirname, '/module.js'))
+    ase(module, __dirname)
 
     // delete require.cache[require.resolve('../index')]
     try { fs.unlinkSync(copy) } catch (e) {}
