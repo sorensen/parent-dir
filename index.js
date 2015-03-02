@@ -54,6 +54,7 @@ module.exports = (function() {
   // If the module path contains the simple path found above, dont use it
   var p2 = path.dirname(dir.id)
   if (!~p2.indexOf(p)) p = p2
+  p = path.resolve(p)
 
   debug('found `%s`', p)
   return p

@@ -1,10 +1,10 @@
 
-find-parent
+parent-dir
 ===========
 
-[![Build Status](https://secure.travis-ci.org/sorensen/find-parent.png)](http://travis-ci.org/sorensen/find-parent) 
-[![devDependency Status](https://david-dm.org/sorensen/find-parent.png)](https://david-dm.org/sorensen/find-parent#info=dependencies)
-[![NPM version](https://badge.fury.io/js/find-parent.png)](http://badge.fury.io/js/find-parent)
+[![Build Status](https://secure.travis-ci.org/sorensen/parent-dir.png)](http://travis-ci.org/sorensen/parent-dir) 
+[![devDependency Status](https://david-dm.org/sorensen/parent-dir.png)](https://david-dm.org/sorensen/parent-dir#info=dependencies)
+[![NPM version](https://badge.fury.io/js/parent-dir.png)](http://badge.fury.io/js/parent-dir)
 
 
 
@@ -14,5 +14,5 @@ Install
 With [npm](https://npmjs.org)
 
 ```
-npm install find-parent
+npm install parent-dir
 ```
